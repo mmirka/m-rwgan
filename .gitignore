@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Large NoC training data (~924MB) — exceeds GitHub's file-size limits and kept
+# local-only; see data/raw/README.md for where to get it. READMEs stay tracked.
+# (The curated subset needed to reproduce the paper figures is bundled
+# separately and tracked under figures/data/.)
+data/raw/**
+data/raw/reward_weight_sweep_8x8_3reward/**
+!data/raw/**/
+!data/raw/**/README.md
+
+# Figure inputs too large for git — see figures/data/README.md for how to
+# obtain them (same pattern as data/raw/). READMEs stay tracked.
+figures/data/dataset_10k_uniform_3c
+figures/data/dataset_10k_hotspot30_3c
+figures/data/reward_weight_sweep_8x8_3reward/**
+figures/data/dse_12r3c/**
+
+# Training run output — the folder stays (via .gitkeep), the weights and loss
+# logs a run produces don't. results/figures/ is the exception: those are the
+# committed reference renders figures/README.md tells you to compare against.
+# The `!results/**/` line is load-bearing: git does not descend into an excluded
+# directory, so without it `!results/figures/**` never fires and the renders are
+# silently dropped. Same idiom as data/raw/ above.
+results/**
+!results/**/
+!results/.gitkeep
+!results/figures/**
+
+# Generated figure / demo outputs — the folders stay (via .gitkeep), contents don't
+figures/output/**
+!figures/output/.gitkeep
+demos/mnist/output/**
+!demos/mnist/output/.gitkeep
+
+# OS / editor cruft
+.DS_Store
+*.swp

@@ -1,0 +1,33 @@
+# Pins the TensorFlow 2.2 stack the NoC reward-network checkpoints in
+# data/reference/ were trained and saved with (TensorFlow 2.2 / Keras 2.3.1
+# / Spektral).
+#
+# All versions below were installed together and verified to import and run.
+# spektral 1.0.8 is required for the `GCNConv`/`GlobalSumPool` layer names
+# the checkpoints were saved with (an older spektral, e.g. 0.6.x, only has
+# `GraphConv` and will fail to load them) — 1.0.8 is the earliest spektral
+# release with that naming that still installs cleanly alongside TF 2.2.
+# protobuf must be pinned below 3.20 or TF 2.2 fails to import at all
+# ("Descriptors cannot be created directly").
+#
+# Create with:  conda env create -f environment.yml
+# Then:         conda activate mrwgan
+name: mrwgan
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - tensorflow==2.2.0
+      - keras==2.3.1
+      - protobuf==3.19.6
+      - spektral==1.0.8
+      - numpy==1.18.5
+      - scipy==1.4.1
+      - scikit-learn==1.2.2
+      - pandas==1.4.4
+      - matplotlib==3.5.3
+      - pyyaml==6.0.3
+      - h5py==2.10.0

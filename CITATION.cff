@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite the DATE 2022 paper below, which it
+  reimplements.
+title: "m-rwgan — multi-reward WGAN for heterogeneous network-on-chip design"
+abstract: >-
+  A reimplementation of M-RWGAN: a Wasserstein GAN steered by several frozen
+  reward networks at once — throughput, power and area — generating router-class
+  assignments over a fixed mesh, so that design-space exploration returns a
+  small set of near-Pareto heterogeneous networks-on-chip rather than one answer.
+type: software
+authors:
+  - family-names: Mirka
+    given-names: Maxime
+repository-code: "https://github.com/mmirka/m-rwgan"
+license: Apache-2.0
+preferred-citation:
+  type: conference-paper
+  title: >-
+    A Generative AI for Heterogeneous Network-on-Chip Design Space Pruning
+  authors:
+    - family-names: Mirka
+      given-names: Maxime
+    - family-names: France-Pillois
+      given-names: Maxime
+    - family-names: Sassatelli
+      given-names: Gilles
+    - family-names: Gamatié
+      given-names: Abdoulaye
+  collection-title: >-
+    2022 Design, Automation & Test in Europe Conference & Exhibition (DATE)
+  conference:
+    name: "DATE 2022"
+    city: Antwerp
+    country: BE
+  year: 2022
+  month: 3
+  start: 1135
+  end: 1138
+  publisher:
+    name: "IEEE"
+  doi: "10.23919/DATE54114.2022.9774721"
+  url: "https://hal-lirmm.ccsd.cnrs.fr/lirmm-03475912v1"

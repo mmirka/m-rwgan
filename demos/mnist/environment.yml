@@ -1,0 +1,27 @@
+# Standalone conda env for the MNIST M-RWGAN demo notebooks (demos/mnist/).
+#
+# Eager TensorFlow 2.15 -- the WGAN-GP gradient penalty is computed with
+# tf.GradientTape (no tf.compat.v1.disable_eager_execution()). Still Keras 2,
+# so the tf.keras model code is unchanged. This is a separate env from the
+# repo's main `mrwgan` env, which pins the TF 2.2 legacy stack the NoC
+# reward-network checkpoints were saved with.
+#
+# GPU: the `tensorflow[and-cuda]` extra bundles the nvidia-*-cu12 wheels, so
+# CUDA/cuDNN come from pip -- no system CUDA toolkit needed (only an NVIDIA
+# driver >= 525). Falls back to CPU automatically if no GPU is present.
+#
+# Create with:  conda env create -f environment.yml
+# Then:         conda activate mrwgan-mnist
+name: mrwgan-mnist
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+      - tensorflow[and-cuda]==2.15.1
+      - numpy<2  # TF 2.15 requires NumPy 1.x; NumPy 2.x crashes on import
+      - matplotlib
+      - jupyter
+      - ipykernel

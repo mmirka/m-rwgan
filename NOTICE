@@ -1,0 +1,41 @@
+m-rwgan
+Copyright 2026 Maxime Mirka
+
+This product includes software developed by Maxime Mirka at LIRMM,
+Université de Montpellier / CNRS, as part of the PhD thesis "Techniques
+d'apprentissage pour le contrôle adaptatif multi-niveaux du calcul distribué"
+(2021), and published as:
+
+  M. Mirka, G. Sassatelli, A. Gamatié, "Generative Artificial Intelligence for
+  the Design of Heterogeneous Networks-on-Chip", DATE 2022.
+
+Third-party material
+--------------------
+
+  reference/hnocs_pipeline/HNOCS_README.md
+
+    Reproduced from the upstream HNOCS project README. HNOCS ("HNoCS: Modular
+    Open-Source Simulator for Heterogeneous NoCs") is the work of Y. Ben-Itzhak,
+    E. Zahavi, I. Cidon and A. Kolodny (Technion), presented at SAMOS XII, 2012.
+    Copyright remains with its authors; it is excluded from this repository's
+    licence. The simulator itself is NOT vendored here.
+
+  reference/hnocs_pipeline/REPRODUCTION.md
+
+    Quotes the upstream HNOCS `Docker.memo` verbatim in the block so marked.
+    Copyright remains with the HNOCS authors.
+
+  Orion 3.0
+
+    The power/area model used to produce the simulated NoC measurements is
+    distributed by UC San Diego under a non-commercial academic licence. It is
+    NOT vendored here, deliberately; see `reference/hnocs_pipeline/README.md`.
+
+Data format
+-----------
+
+The `Data_AX` datasets under `figures/data/` and `data/` are Python pickles, and
+the pretrained reward networks under `data/reference/reward_networks/` are
+TensorFlow SavedModels. Both formats execute code on load. Load only copies you
+obtained from this repository or from the archive it cites — including the
+Keras `.h5` checkpoints a training run of your own writes under `results/`.

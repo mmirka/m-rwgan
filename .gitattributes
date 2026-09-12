@@ -1,0 +1,4 @@
+# TensorFlow SavedModel protobufs. GitHub's linguist reads a .pb file as
+# PureBasic source, which put "PureBasic 16%" on the repository's language
+# bar; these are serialised model weights, not code anybody wrote.
+*.pb linguist-generated=true

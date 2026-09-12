@@ -1,0 +1,50 @@
+# GPU training environment for M-RWGAN.
+#
+# The TensorFlow 2.2 / CUDA 10.1 stack in environment.yml CANNOT target modern
+# NVIDIA GPUs: anything Ampere or newer (compute capability >= 8.0, e.g. an
+# RTX 30-series card) needs CUDA 11.1+ / TF 2.4+, and TF 2.2 has no kernels for
+# it. This environment retargets the stack to the newest combination that still
+# loads the Spektral reward-network checkpoints unchanged.
+#
+# TF 2.10.1 is the last TensorFlow release where a plain `pip install tensorflow`
+# provides Linux GPU support without the `[and-cuda]` extra; it pairs with
+# CUDA 11.2 + cuDNN 8.1 (provided here by conda-forge) and supports sm_86.
+#
+# After `conda activate mrwgan-gpu`, TF must be able to find the conda CUDA libs:
+#   mkdir -p "$CONDA_PREFIX/etc/conda/activate.d"
+#   echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib' \
+#     > "$CONDA_PREFIX/etc/conda/activate.d/cuda_ld.sh"
+#   conda deactivate && conda activate mrwgan-gpu
+#
+# Create with:  conda env create -f environment-gpu.yml
+# Then:         conda activate mrwgan-gpu
+#
+# spektral 1.0.8 (the CPU env's pin) is incompatible with this stack — it caps
+# numpy<1.20 while TF 2.10 needs numpy>=1.20 — so this env uses spektral 1.3.0,
+# the last release, which keeps the same GCNConv/GlobalSumPool layer classes
+# the reward-network SavedModel checkpoints under data/reference/ use.
+#
+# Further fallback if TF 2.10 + spektral 1.3.0 still can't load the checkpoints:
+# switch the pip block to `tensorflow[and-cuda]==2.14.*` and drop the
+# cudatoolkit / cudnn conda deps below (CUDA then ships inside the pip wheels).
+name: mrwgan-gpu
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pip
+  - cudatoolkit=11.2
+  - cudnn=8.1.0
+  - pip:
+      - tensorflow==2.10.1
+      - protobuf==3.19.6      # inside TF 2.10's required >=3.9.2,<3.20 range
+      - spektral==1.3.0       # last release; keeps GCNConv/GlobalSumPool. The
+                              # CPU env's 1.0.8 caps numpy<1.20 and can't be
+                              # installed alongside TF 2.10 (needs numpy>=1.20).
+      - numpy==1.23.5
+      - scipy==1.9.3
+      - scikit-learn==1.2.2
+      - pandas==1.4.4
+      - matplotlib==3.5.3
+      - pyyaml==6.0.3
+      - h5py==3.7.0           # TF 2.10 requires h5py>=3.1
